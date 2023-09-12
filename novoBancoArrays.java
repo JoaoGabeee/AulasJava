@@ -52,11 +52,11 @@ public class Main {
 
         if (supostaSenhaDoUser.equals(senhaUsuario)) {
             int valorSaque = Integer.parseInt(JOptionPane.showInputDialog("Quanto deseja sacar? saldo R$:" + saldo));
-            if (saldo >= valorSaque) {
+            if (saldo >= valorSaque && valorSaque > 0) {
                 saldo -= valorSaque;
                 JOptionPane.showMessageDialog(null, "Saque efetuado com sucesso.\nSaldo atual R$:" + saldo);
             } else {
-                JOptionPane.showMessageDialog(null, "Você não tem saldo suficiente!");
+                JOptionPane.showMessageDialog(null, "Valor inválido!");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Senha incorreta!");
