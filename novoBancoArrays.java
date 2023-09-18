@@ -9,12 +9,12 @@ public class Main {
     static Random aleatorio = new Random();
 
     public static void main(String[] args) {
-        criarConta();
+        jaTenhoOuNaoConta();
 
     }
 
-    static void inicio() {
-        String[] array = {"Saldo", "Sacar", "Deposito", "Sair"};
+    static void conta() {
+        String[] array = {"Saldo", "Sacar", "Deposito", "Entrar em outra conta", "Criar outra conta", "Sair"};
 
         String resposta = (String) JOptionPane.showInputDialog(
                 null,
@@ -27,7 +27,10 @@ public class Main {
         );
 
         switch (resposta) {
-            case "Saldo" -> saldoBanco();
+            case "Saldo" -> {
+                saldoBanco();
+
+            }
             case "Sacar" -> saqueBanco();
             case "Depositar" -> depositoBanco();
             default -> sairPrograma();
@@ -37,7 +40,7 @@ public class Main {
     static void saldoBanco() {
 
         JOptionPane.showMessageDialog(null, "Seu saldo é de R$:" + saldo);
-        inicio();
+        conta();
     }
 
     static void saqueBanco() {
@@ -54,7 +57,7 @@ public class Main {
         } else {
             JOptionPane.showMessageDialog(null, "Senha incorreta!");
         }
-        inicio();
+        conta();
     }
 
     static void depositoBanco() {
@@ -64,11 +67,11 @@ public class Main {
             int deposito = Integer.parseInt(JOptionPane.showInputDialog("Quanto deseja depositar?"));
             saldo += deposito;
             JOptionPane.showMessageDialog(null, "Deposito efetuado com sucesso.\n saldo atual R$:" + saldo);
-            inicio();
+            conta();
         } else {
             JOptionPane.showMessageDialog(null, "Senha incorreta!");
         }
-        inicio();
+        conta();
     }
 
     static void sairPrograma() {
@@ -76,7 +79,7 @@ public class Main {
     }
 
     static void criarConta() {
-        JOptionPane.showMessageDialog(null, "Olá, seja bem-vindo.\nIremos ajudar a criar sua conta!");
+        JOptionPane.showMessageDialog(null, "Seja bem-vindo.\nIremos ajudar a criar sua conta!");
         nomeUsuario = JOptionPane.showInputDialog("Qual seu nome?");
         senhaUsuario = JOptionPane.showInputDialog("Digite uma senha.");
         primeiroDeposito();
@@ -87,11 +90,47 @@ public class Main {
         JOptionPane.showMessageDialog(null, "Deposito efetuado com sucesso!");
         saldo = depositoInicial;
         JOptionPane.showMessageDialog(null, "NOME: " + nomeUsuario + "\nSENHA: *********" + "\nVALOR DEPOSITADO: " + depositoInicial);
-        inicio();
+        conta();
     }
 
     static void primeiroDeposito() {
         depositoInicial = Integer.parseInt(JOptionPane.showInputDialog("Deposite um valor para ativar sua conta (o valor deve ser maior que R$:10)."));
 
+    }
+
+    static void jaTenhoOuNaoConta() {
+
+        String[] array = {"Sim", "Não", "Sair"};
+
+        int simNaoSair = JOptionPane.showOptionDialog(
+                null,
+                "Você já tem uma conta em nosso banco?",
+                "Olà",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
+                null, array, array[0]);
+
+        if (simNaoSair == 0) {
+            entrarConta();
+        } else if (simNaoSair == 1) {
+            criarConta();
+        } else {
+            sairPrograma();
+        }
+    }
+
+    static void entrarConta() {
+        String supostoNome = JOptionPane.showInputDialog("Qual o nome da sua conta?");
+        if (supostoNome.equals(nomeUsuario)) {
+            String supostaSenha = JOptionPane.showInputDialog("Qual sua senha?");
+            if (supostaSenha.equals(senhaUsuario)) {
+                conta();
+            } else {
+                JOptionPane.showMessageDialog(null, "Senha incorreta!");
+                sairPrograma();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nome não encontrado!\nTente novamente.");
+            entrarConta();
+        }
     }
 }
