@@ -27,10 +27,7 @@ public class Main {
         );
 
         switch (resposta) {
-            case "Saldo" -> {
-                saldoBanco();
-      
-            }
+            case "Saldo" -> saldoBanco();
             case "Sacar" -> saqueBanco();
             case "Depositar" -> depositoBanco();
             default -> sairPrograma();
