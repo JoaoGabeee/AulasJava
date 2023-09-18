@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Main {
 
-    static String nomeUsuario, senhaUsuario, supostaSenhaDoUser;
-    static int resposta, saldo, depositoInicial;
+    static String nomeUsuario, senhaUsuario, supostaSenhaDoUser, resposta;
+    static int saldo, depositoInicial;
 
     static Random aleatorio = new Random();
 
@@ -16,28 +16,24 @@ public class Main {
     static void inicio() {
         String[] array = {"Saldo", "Sacar", "Deposito", "Sair"};
 
-        resposta = JOptionPane.showOptionDialog(null,
-                "Escolha a operação que deseja realizar " + nomeUsuario,
-                "Banco",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
-                null, array, array[0]);
+        String resposta = (String) JOptionPane.showInputDialog(
+                null,
+                "O que você desejar fazer: ",
+                "Operações",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                array,
+                array[0]
+        );
 
         switch (resposta) {
-
-            case 0:
+            case "Saldo" -> {
                 saldoBanco();
-                break;
-
-            case 1:
-                saqueBanco();
-                break;
-
-            case 2:
-                depositoBanco();
-                break;
-
-            default:
-                sairPrograma();
+      
+            }
+            case "Sacar" -> saqueBanco();
+            case "Depositar" -> depositoBanco();
+            default -> sairPrograma();
         }
     }
 
