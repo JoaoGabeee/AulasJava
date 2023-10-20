@@ -74,5 +74,13 @@ public class testeConta {
         contaBanco.debito(80);
         JOptionPane.showMessageDialog(null, "saldo " + contaBanco.getSaldo());
         contaBanco.debito(30);
+
+        Conta contaBanco02 = new Conta();
+
+        contaBanco02.setNumero(002);
+        contaBanco02.setSaldo(20000);
+
+        JOptionPane.showMessageDialog(null, " conta: " + contaBanco.getNumero() + " saldo: " + contaBanco.getSaldo() +
+                "\n" + " conta: " + contaBanco02.getNumero() + " saldo: " + contaBanco02.getSaldo());
     }
 }
